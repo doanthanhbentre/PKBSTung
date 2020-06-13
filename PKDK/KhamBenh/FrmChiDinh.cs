@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
-
+using DevExpress.XtraReports.UI;
 namespace PKDK.KhamBenh
 {
     public partial class FrmChiDinh : DevExpress.XtraEditors.XtraForm
@@ -90,7 +90,7 @@ namespace PKDK.KhamBenh
 
         private void FrmChiDinh_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter) SendKeys.Send("{Tab}");
+            //if (e.KeyCode == Keys.Enter) SendKeys.Send("{Tab}");
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -100,7 +100,7 @@ namespace PKDK.KhamBenh
                 DataRowView drv = (DataRowView)bindingGiaDichVu[bindingGiaDichVu.Find("GIADVID", txtTenDV.EditValue.ToString())];
                 if (drv != null)
                 {
-                    chiDinh.saveData(DotKhamID, PhongKhamID, txtTenDV.EditValue.ToString(), Double.Parse(txtSoLuong.Value.ToString()), Double.Parse(drv["DonGia"].ToString()));
+                    chiDinh.saveData(DotKhamID, PhongKhamID, txtTenDV.EditValue.ToString(), Double.Parse(txtSoLuong.Value.ToString()), Double.Parse(drv["DonGia"].ToString()), "");
                     loadChiDinh();
                     btnNew.Focus();
                 }
@@ -152,6 +152,12 @@ namespace PKDK.KhamBenh
                 btnDelete.Enabled = false;
                 btnPrintChiDinh.Enabled = false;
             }
+            Int32 m_SoTien = 0;
+            foreach (DataRowView drv in bindingChiDinh)
+            {
+                m_SoTien += Int32.Parse(drv["ThanhTien"].ToString());
+            }
+            lblTongTien.Text = m_SoTien.ToString("#,###");
         }
 
         private void btnChonGoiXN_Click(object sender, EventArgs e)
@@ -162,7 +168,7 @@ namespace PKDK.KhamBenh
                 DataView dv = chiTietGoi.getDataTable(frm.GoiDVID).DefaultView;
                 foreach (DataRowView drv in dv)
                 {
-                    chiDinh.saveData(DotKhamID, PhongKhamID, drv["GiaDVID"].ToString(), 1, Double.Parse(drv["DonGia"].ToString()));
+                    chiDinh.saveData(DotKhamID, PhongKhamID, drv["GiaDVID"].ToString(), 1, Double.Parse(drv["DonGia"].ToString()), "");
                     loadChiDinh();
                 }
             }
@@ -170,10 +176,17 @@ namespace PKDK.KhamBenh
 
         private void btnPrintChiDinh_Click(object sender, EventArgs e)
         {
-            FrmInPhieuChiDinh frm = new KhamBenh.FrmInPhieuChiDinh();
-            frm.loadData(DotKhamID, lstLoaiDichVu.Text, lstLoaiDichVu.SelectedValue.ToString());
-            frm.WindowState = FormWindowState.Maximized;
-            frm.Show();
+            PhieuChiDinh report = new PhieuChiDinh();
+            report.DataSource = chiDinh.getPhieuChiDinh(DotKhamID, lstLoaiDichVu.SelectedValue.ToString()).DefaultView;
+            report.Parameters["pTieuDe"].Value = "PHIẾU " + lstLoaiDichVu.Text.ToUpper();
+            report.ShowPreviewDialog();
+        }
+
+        private void btnKetQuaCD_Click(object sender, EventArgs e)
+        {
+            FrmKetQuaCD frm = new FrmKetQuaCD();
+            frm.MaBN = lblMaBN.Text;
+            frm.ShowDialog();
         }
 
         private void FrmChiDinh_Load(object sender, EventArgs e)

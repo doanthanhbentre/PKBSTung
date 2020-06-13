@@ -103,9 +103,9 @@ namespace PKDK.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap LacHong {
+        internal static System.Drawing.Bitmap PKBSLINH {
             get {
-                object obj = ResourceManager.GetObject("LacHong", resourceCulture);
+                object obj = ResourceManager.GetObject("PKBSLINH", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

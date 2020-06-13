@@ -49,6 +49,7 @@
             this.colDonGia = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colThanhTien = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colCachDung = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemMemoEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
@@ -61,6 +62,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridThuoc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingDonThuoc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoEdit1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl1
@@ -172,6 +174,8 @@
             this.gridThuoc.Location = new System.Drawing.Point(2, 21);
             this.gridThuoc.MainView = this.gridView1;
             this.gridThuoc.Name = "gridThuoc";
+            this.gridThuoc.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemMemoEdit1});
             this.gridThuoc.Size = new System.Drawing.Size(541, 295);
             this.gridThuoc.TabIndex = 1;
             this.gridThuoc.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -193,12 +197,13 @@
             this.gridView1.GridControl = this.gridThuoc;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.Editable = false;
+            this.gridView1.OptionsView.RowAutoHeight = true;
             this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
             // colTenSP
             // 
             this.colTenSP.Caption = "Tên thuốc";
-            this.colTenSP.FieldName = "TENSP";
+            this.colTenSP.FieldName = "TENDV";
             this.colTenSP.Name = "colTenSP";
             this.colTenSP.Visible = true;
             this.colTenSP.VisibleIndex = 0;
@@ -207,7 +212,7 @@
             // colTenDonVi
             // 
             this.colTenDonVi.Caption = "Đơn vị";
-            this.colTenDonVi.FieldName = "TENDONVI";
+            this.colTenDonVi.FieldName = "DONVI";
             this.colTenDonVi.Name = "colTenDonVi";
             this.colTenDonVi.Visible = true;
             this.colTenDonVi.VisibleIndex = 1;
@@ -257,12 +262,17 @@
             // 
             // colCachDung
             // 
-            this.colCachDung.Caption = "Liều dùng";
+            this.colCachDung.Caption = "Cách dùng";
+            this.colCachDung.ColumnEdit = this.repositoryItemMemoEdit1;
             this.colCachDung.FieldName = "CACHDUNG";
             this.colCachDung.Name = "colCachDung";
             this.colCachDung.Visible = true;
             this.colCachDung.VisibleIndex = 5;
             this.colCachDung.Width = 187;
+            // 
+            // repositoryItemMemoEdit1
+            // 
+            this.repositoryItemMemoEdit1.Name = "repositoryItemMemoEdit1";
             // 
             // FrmDonTruoc
             // 
@@ -291,6 +301,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridThuoc)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingDonThuoc)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoEdit1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -316,5 +327,6 @@
         private DevExpress.XtraEditors.SimpleButton btnChapNhan;
         private System.Windows.Forms.BindingSource bindingDotKham;
         private System.Windows.Forms.BindingSource bindingDonThuoc;
+        private DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit repositoryItemMemoEdit1;
     }
 }

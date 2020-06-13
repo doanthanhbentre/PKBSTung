@@ -14,7 +14,7 @@ namespace PKDK.KhamBenh
     public partial class FrmDonTruoc : DevExpress.XtraEditors.XtraForm
     {
         QLPK.DataAccess.DotKham dotKham = new QLPK.DataAccess.DotKham();
-        QLPK.DataAccess.DonThuoc donThuoc = new QLPK.DataAccess.DonThuoc();
+        QLPK.DataAccess.ChiDinh chiDinh = new QLPK.DataAccess.ChiDinh();
         String m_MaBN;
         String m_DotKhamID;
         public string MaBN
@@ -51,9 +51,9 @@ namespace PKDK.KhamBenh
         {
             DataRowView drv = (DataRowView)bindingDotKham.Current;
             if (drv != null)
-                bindingDonThuoc.DataSource = donThuoc.getDataTable(drv["DotKhamID"].ToString());
+                bindingDonThuoc.DataSource = chiDinh.getDataTable(drv["DotKhamID"].ToString(), "01");
             else
-                bindingDonThuoc.DataSource = donThuoc.getDataTable("");
+                bindingDonThuoc.DataSource = chiDinh.getDataTable("");
         }
         private void btnClose_Click(object sender, EventArgs e)
         {

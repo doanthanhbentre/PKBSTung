@@ -48,6 +48,7 @@
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemMemoEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingBenh)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingDonThuoc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
@@ -60,6 +61,7 @@
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoEdit1)).BeginInit();
             this.SuspendLayout();
             // 
             // bindingBenh
@@ -161,6 +163,8 @@
             this.gridControl2.Location = new System.Drawing.Point(2, 21);
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Name = "gridControl2";
+            this.gridControl2.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemMemoEdit1});
             this.gridControl2.Size = new System.Drawing.Size(547, 302);
             this.gridControl2.TabIndex = 0;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -178,12 +182,13 @@
             this.gridView2.GridControl = this.gridControl2;
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsBehavior.Editable = false;
+            this.gridView2.OptionsView.RowAutoHeight = true;
             this.gridView2.OptionsView.ShowGroupPanel = false;
             // 
             // gridColumn3
             // 
             this.gridColumn3.Caption = "Mã số";
-            this.gridColumn3.FieldName = "MASP";
+            this.gridColumn3.FieldName = "GIADVID";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 0;
@@ -192,7 +197,7 @@
             // gridColumn4
             // 
             this.gridColumn4.Caption = "Tên thuốc";
-            this.gridColumn4.FieldName = "TENSP";
+            this.gridColumn4.FieldName = "TENDV";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 1;
@@ -201,7 +206,7 @@
             // gridColumn5
             // 
             this.gridColumn5.Caption = "Đơn vị";
-            this.gridColumn5.FieldName = "TENDONVI";
+            this.gridColumn5.FieldName = "DONVI";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 2;
@@ -219,6 +224,7 @@
             // gridColumn7
             // 
             this.gridColumn7.Caption = "Cách dùng";
+            this.gridColumn7.ColumnEdit = this.repositoryItemMemoEdit1;
             this.gridColumn7.FieldName = "CACHDUNG";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
@@ -228,8 +234,12 @@
             // gridColumn8
             // 
             this.gridColumn8.Caption = "Đơn giá";
-            this.gridColumn8.FieldName = "GIAXUAT";
+            this.gridColumn8.FieldName = "DONGIA";
             this.gridColumn8.Name = "gridColumn8";
+            // 
+            // repositoryItemMemoEdit1
+            // 
+            this.repositoryItemMemoEdit1.Name = "repositoryItemMemoEdit1";
             // 
             // FrmChonDonMau
             // 
@@ -258,6 +268,7 @@
             this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemMemoEdit1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -282,5 +293,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
         private DevExpress.XtraEditors.SimpleButton btnClose;
         private DevExpress.XtraEditors.SimpleButton btnSelect;
+        private DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit repositoryItemMemoEdit1;
     }
 }

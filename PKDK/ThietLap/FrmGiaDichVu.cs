@@ -57,7 +57,7 @@ namespace PKDK.ThietLap
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            giaDichVu.saveData(txtMaSo.Text, LoaiDVID, txtTen.Text, txtDonViTinh.Text, txtDonGia.Value, "");
+            giaDichVu.saveData(txtMaSo.Text, LoaiDVID, txtTen.Text, txtDonViTinh.Text, txtDonGia.Value, "", "");
             loadData();
             btnNew.Focus();
         }

@@ -34,5 +34,21 @@ namespace PKDK.KhamBenh
         {
             Close();
         }
+
+        private void btnDangKyKham_Click(object sender, EventArgs e)
+        {
+            DataRowView drv = (DataRowView)bindingSource1.Current;
+            if (drv != null)
+            {
+                FrmPhieuKham frm = new FrmPhieuKham();
+                frm.MaBN = drv["MaBN"].ToString();
+                frm.ShowDialog();
+            }
+        }
+
+        private void gridControl1_DoubleClick(object sender, EventArgs e)
+        {
+            btnDangKyKham_Click(null, null);
+        }
     }
 }

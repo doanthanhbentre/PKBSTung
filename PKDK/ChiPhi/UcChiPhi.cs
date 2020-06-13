@@ -15,7 +15,7 @@ namespace PKDK.ChiPhi
     {
         Double m_TongSoTien, m_DaThu, m_ChuaThu;
         QLPK.DataAccess.ChiDinh chiDinh = new QLPK.DataAccess.ChiDinh();
-        QLPK.DataAccess.DonThuoc donThuoc = new QLPK.DataAccess.DonThuoc();
+        //QLPK.DataAccess.DonThuoc donThuoc = new QLPK.DataAccess.DonThuoc();
         public Double TongSoTien
         {
             get { return m_TongSoTien; }
@@ -49,18 +49,11 @@ namespace PKDK.ChiPhi
             DaThu = 0;
             ChuaThu = 0;
             DataRow dr = chiDinh.getSoTien(dotKhamID);
-            DataRow drThuoc = donThuoc.getSoTien(dotKhamID);
             if (dr["SoTien"] != DBNull.Value)
             {
                 TongSoTien = Double.Parse(dr["SoTien"].ToString());
                 DaThu = Double.Parse(dr["DaThu"].ToString());
                 ChuaThu = Double.Parse(dr["ChuaThu"].ToString());
-            }
-            if (drThuoc["SoTien"] != DBNull.Value)
-            {
-                TongSoTien += Double.Parse(drThuoc["SoTien"].ToString());
-                DaThu += Double.Parse(drThuoc["DaThu"].ToString());
-                ChuaThu += Double.Parse(drThuoc["ChuaThu"].ToString());
             }
             showData();
         }

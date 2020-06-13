@@ -6,11 +6,12 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
+using DevExpress.XtraReports.UI;
 namespace PKDK
 {
     public partial class FrmMain : DevExpress.XtraBars.Ribbon.RibbonForm
     {
+        QLPK.DataAccess.SoKhamBenh soKhamBenh = new QLPK.DataAccess.SoKhamBenh();
         public FrmMain()
         {
             InitializeComponent();
@@ -59,25 +60,27 @@ namespace PKDK
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
-            MdiClient ctlMDI;
+            this.BackgroundImage = Image.FromFile("Background.jpg");
+            this.BackgroundImageLayout = ImageLayout.Stretch;
+            //MdiClient ctlMDI;
 
             // Loop through all of the form's controls looking
             // for the control of type MdiClient.
-            foreach (Control ctl in this.Controls)
-            {
-                try
-                {
-                    // Attempt to cast the control to type MdiClient.
-                    ctlMDI = (MdiClient)ctl;
+            //foreach (Control ctl in this.Controls)
+            //{
+            //    try
+            //    {
+            //        // Attempt to cast the control to type MdiClient.
+            //        ctlMDI = (MdiClient)ctl;
 
-                    // Set the BackColor of the MdiClient control.
-                    ctlMDI.BackColor = this.BackColor;
-                }
-                catch (InvalidCastException exc)
-                {
-                    // Catch and ignore the error if casting failed.
-                }
-            }
+            //        // Set the BackColor of the MdiClient control.
+            //        ctlMDI.BackColor = this.BackColor;
+            //    }
+            //    catch (InvalidCastException exc)
+            //    {
+            //        // Catch and ignore the error if casting failed.
+            //    }
+            //}
             ribbonControl1.SelectedPage = ribbonKhamBenh;
             stsHomNay.Caption = String.Format("Hôm nay, {0} ngày {1} tháng {2} năm {3}", getThu(), DateTime.Today.Day, DateTime.Today.Month, DateTime.Today.Year);
             btnDangXuat_ItemClick(null, null);
@@ -118,7 +121,7 @@ namespace PKDK
         private void btnDichVu_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             ThietLap.FrmGiaDichVu frm = new ThietLap.FrmGiaDichVu();
-            frm.LoaiDVID = "01";
+            frm.LoaiDVID = "04";
             frm.TenLoaiDV = "Dịch vụ KCB";
             frm.ShowDialog();
         }
@@ -185,7 +188,9 @@ namespace PKDK
 
         private void btnThuoc_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            ThietLap.FrmSanPham frm = new ThietLap.FrmSanPham();
+            ThietLap.FrmThuoc frm = new ThietLap.FrmThuoc();
+            frm.LoaiDVID = "01";
+            frm.TenLoaiDV = "Thuốc, hóa chất";
             frm.ShowDialog();
         }
 
@@ -213,25 +218,33 @@ namespace PKDK
 
         private void btnThuDichVu_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            HeThong.FrmThoiGian tg = new HeThong.FrmThoiGian();
-            if (tg.ShowDialog() == DialogResult.OK)
+            ChiPhi.FrmMatKhau frmMT = new ChiPhi.FrmMatKhau();
+            if (frmMT.ShowDialog() == DialogResult.OK)
             {
-                ChiPhi.FrmInTKDichVu frm = new ChiPhi.FrmInTKDichVu();
-                frm.loadData(tg.TuNgay, tg.DenNgay, tg.ThoiGian);
-                frm.WindowState = FormWindowState.Maximized;
-                frm.ShowDialog();
+                HeThong.FrmThoiGian tg = new HeThong.FrmThoiGian();
+                if (tg.ShowDialog() == DialogResult.OK)
+                {
+                    ChiPhi.FrmInTKDichVu frm = new ChiPhi.FrmInTKDichVu();
+                    frm.loadData(tg.TuNgay, tg.DenNgay, tg.ThoiGian);
+                    frm.WindowState = FormWindowState.Maximized;
+                    frm.ShowDialog();
+                }
             }
         }
 
         private void btnThuNguoiBenh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            HeThong.FrmThoiGian tg = new HeThong.FrmThoiGian();
-            if (tg.ShowDialog() == DialogResult.OK)
+            ChiPhi.FrmMatKhau frmMT = new ChiPhi.FrmMatKhau();
+            if (frmMT.ShowDialog() == DialogResult.OK)
             {
-                ChiPhi.FrmInTKBenhNhan frm = new ChiPhi.FrmInTKBenhNhan();
-                frm.loadData(tg.TuNgay, tg.DenNgay, tg.ThoiGian);
-                frm.WindowState = FormWindowState.Maximized;
-                frm.ShowDialog();
+                HeThong.FrmThoiGian tg = new HeThong.FrmThoiGian();
+                if (tg.ShowDialog() == DialogResult.OK)
+                {
+                    ChiPhi.FrmInTKBenhNhan frm = new ChiPhi.FrmInTKBenhNhan();
+                    frm.loadData(tg.TuNgay, tg.DenNgay, tg.ThoiGian);
+                    frm.WindowState = FormWindowState.Maximized;
+                    frm.ShowDialog();
+                }
             }
         }
 
@@ -244,6 +257,51 @@ namespace PKDK
                 frm.loadData(tg.TuNgay, tg.DenNgay, tg.ThoiGian);
                 frm.WindowState = FormWindowState.Maximized;
                 frm.ShowDialog();
+            }
+        }
+
+        private void btnSoCLS_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            KhamBenh.FrmChonSoCLS frm = new KhamBenh.FrmChonSoCLS();
+            frm.ShowDialog();
+        }
+
+        private void btnSoKSK_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            HeThong.FrmThoiGian frm = new HeThong.FrmThoiGian();
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                KhamBenh.SoKhamBenh_A1 report = new KhamBenh.SoKhamBenh_A1();
+                report.DataSource = soKhamBenh.soKSK(frm.TuNgay, frm.DenNgay).DefaultView;
+                report.Parameters["pTieuDe"].Value = "SỔ KHÁM BẢO HIỂM NHÂN THỌ";
+                report.ShowPreviewDialog();
+            }
+        }
+
+        private void btnGoiKSK_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ThietLap.FrmGoiKSK frm = new ThietLap.FrmGoiKSK();
+            frm.ShowDialog();
+        }
+
+        private void btnBienBan_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            HeThong.FrmThoiGian frm = new HeThong.FrmThoiGian();
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                DataView dv = soKhamBenh.bienBanDoiChieu(frm.TuNgay, frm.DenNgay).DefaultView;
+                long tongSoTien = 0, soTien = 0;
+                foreach (DataRowView drv in dv)
+                {
+                    soTien = long.Parse(drv["SoTien"].ToString()) + long.Parse(drv["SoTienPS"].ToString());
+                    tongSoTien += long.Parse(soTien.ToString());
+                }
+                LibNumRead.NumRead doc = new LibNumRead.NumRead();
+                KhamBenh.SoKSK report = new KhamBenh.SoKSK();
+                report.DataSource = dv;
+                report.Parameters["pThoiGian"].Value = frm.ThoiGian;
+                report.Parameters["pBangChu"].Value = doc.VNDRead(tongSoTien) + " đồng";
+                report.ShowPreviewDialog();
             }
         }
     }

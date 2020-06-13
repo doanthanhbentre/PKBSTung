@@ -47,11 +47,17 @@ namespace PKDK.KhamBenh
             InitializeComponent();
         }
 
+        private void documentViewer1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void FrmInSoKhamBenh_A1_Load(object sender, EventArgs e)
         {
             DevExpress.XtraReports.UI.XtraReport report = new KhamBenh.SoKhamBenh_A1();
             report.DataSource = soKhamBenh.soKhamBenhA1(TuNgay, DenNgay).DefaultView;
-            //report.Parameters["pTacGia"].Value = "Doan Van Thanh";
+            //report.DataSource = soKhamBenh.soCLS(TuNgay, DenNgay, "").DefaultView;
+            report.Parameters["pTieuDe"].Value = "SỔ KHÁM BỆNH CHUNG";
             report.CreateDocument();
             documentViewer1.DocumentSource = report;
         }

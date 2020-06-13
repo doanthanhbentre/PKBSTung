@@ -130,7 +130,7 @@
   <data name="1416573065_Password_protection" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1416573065_Password_protection.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LacHong" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LacHong.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="PKBSLINH" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PKBSLINH.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

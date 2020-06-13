@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using DevExpress.XtraReports.UI;
 
 namespace PKDK.KhamBenh
 {
@@ -17,18 +18,20 @@ namespace PKDK.KhamBenh
         QLPK.DataAccess.DotKham dotKham = new QLPK.DataAccess.DotKham();
         QLPK.DataAccess.PhongKham phongKham = new QLPK.DataAccess.PhongKham();
         QLPK.DataAccess.ChiDinh chiDinh = new QLPK.DataAccess.ChiDinh();
-        QLPK.DataAccess.DonThuoc donThuoc = new QLPK.DataAccess.DonThuoc();
         QLPK.DataAccess.BacSi bacSi = new QLPK.DataAccess.BacSi();
         QLPK.DataAccess.DonThuocMau chiTietMau = new QLPK.DataAccess.DonThuocMau();
         QLPK.DataAccess.ChiTietGoiDV ctGoiDV = new QLPK.DataAccess.ChiTietGoiDV();
         QLPK.DataAccess.DVHC dvhc = new QLPK.DataAccess.DVHC();
         QLPK.DataAccess.PhieuDichVu phieuDichVu = new QLPK.DataAccess.PhieuDichVu();
-        DataAccess.SanPham sanPham = new DataAccess.SanPham();
+        QLPK.DataAccess.GiaDichVu giaDichVu = new QLPK.DataAccess.GiaDichVu();
+        QLPK.DataAccess.GoiKSK goiKSK = new QLPK.DataAccess.GoiKSK();
         String m_DotKhamID = String.Empty;
         DateTime m_NgayKham = DateTime.Today;
         QLPK.DataAccess.ThongTinPK m_ThongTinPK;
         String m_TenDangNhap = String.Empty;
         Boolean m_DangKyKham = false;
+        String m_MaBN = String.Empty;
+
         public Boolean DangKyKham
         {
             get { return m_DangKyKham; }
@@ -50,6 +53,20 @@ namespace PKDK.KhamBenh
             get { return m_DotKhamID; }
             set { m_DotKhamID = value; }
         }
+
+        public string MaBN
+        {
+            get
+            {
+                return m_MaBN;
+            }
+
+            set
+            {
+                m_MaBN = value;
+            }
+        }
+
         public FrmPhieuKham()
         {
             InitializeComponent();
@@ -59,11 +76,16 @@ namespace PKDK.KhamBenh
             loadDotKham();
             loadChiTietDon();
             ucChiPhi1.loadData(DotKhamID);
-            bindingSanPham.DataSource = sanPham.getDataTable();
+            bindingGiaDichVu.DataSource = giaDichVu.getDataTable("01");
+            if (DotKhamID == "")
+            {
+                txtChanDoan.Text = dotKham.getChanDoanCuoi(txtMaBN.Text);
+            }
+            bindingGoiKSK.DataSource = goiKSK.getDataTable().DefaultView;
         }
         private void loadChiTietDon()
         {
-            bindingDonThuoc.DataSource = donThuoc.getDataTable(DotKhamID);
+            bindingDonThuoc.DataSource = chiDinh.getDataTable(DotKhamID, "01");
         }
         private Boolean kiemTra()
         {
@@ -107,13 +129,14 @@ namespace PKDK.KhamBenh
             txtNhietDo.Text = "";
             txtHuyetAp.Text = "";
             txtDienThoai.Text = "";
+            chkBaoHiem.Checked = false;
             NgayKham = DateTime.Today;
             txtTaiKhamSau.EditValue = 0;
             lblNgayTK.Text = DateTime.Today.ToString("dd/MM/yyyy");
         }
         private void FrmPhieuKham_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter) SendKeys.Send("{Tab}");
+            //if (e.KeyCode == Keys.Enter) SendKeys.Send("{Tab}");
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -141,6 +164,8 @@ namespace PKDK.KhamBenh
                 treeView1.Nodes[0].Nodes[i].Nodes.Add(drv["DotKhamID"].ToString(), drv["TenPhongKham"].ToString(), 2);
                 if (drv["ChanDoan"].ToString() != "")
                     treeView1.Nodes[0].Nodes[i].Nodes.Add(drv["DotKhamID"].ToString(), drv["ChanDoan"].ToString(), 3);
+                if (drv["GhiChu"].ToString() != "")
+                    treeView1.Nodes[0].Nodes[i].Nodes.Add(drv["DotKhamID"].ToString(), "Ghi chú: " + drv["GhiChu"].ToString(), 4);
 
                 treeView1.Nodes[0].Nodes[i].Tag = drv["DotKhamID"].ToString();
             }
@@ -152,8 +177,16 @@ namespace PKDK.KhamBenh
             lblNgayTK.Text = DateTime.Today.ToString("dd/MM/yyyy");
             loadBacSi();
             loadPhongKham();
-            loadData();
-            loadCacLanKham();
+            if (MaBN.Length > 0)
+            {
+                txtMaBN.Text = MaBN;
+                txtMaBN_Validated(null, null);
+            }
+            else
+            {
+                loadData();
+                loadCacLanKham();
+            }
         }
 
         private void btnCachDung_Click(object sender, EventArgs e)
@@ -163,6 +196,8 @@ namespace PKDK.KhamBenh
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 txtCachDung.Text = frm.LieuDung;
+                if (txtCachDung.Text.Trim().Length > 0)
+                    giaDichVu.updateCachDung(txtTenSP.EditValue.ToString(), txtCachDung.Text);
                 SendKeys.Send("{Tab}");
             }
         }
@@ -258,8 +293,25 @@ namespace PKDK.KhamBenh
             String m_MaBN = txtMaBN.Text;
             txtMaBN.Text = benhNhan.saveData(m_MaBN, txtHoTen.Text, txtNamSinh.Value, cboGioiTinh.SelectedIndex, txtDiaChi.Text, txtDienThoai.Text);
             DotKhamID = dotKham.saveData(DotKhamID, cboPhongKham.EditValue.ToString(), NgayKham, cboBacSi.EditValue.ToString(), txtMaBN.Text, txtChanDoan.Text, txtMach.Text, txtHuyetAp.Text, txtNhietDo.Text);
-            if (Int16.Parse(txtTaiKhamSau.EditValue.ToString()) > 0)
-                dotKham.updateNgayTaiKham(DotKhamID, DateTime.Today.AddDays(Int16.Parse(txtTaiKhamSau.EditValue.ToString())));
+            dotKham.updateNgayTaiKham(DotKhamID, Int32.Parse(txtTaiKhamSau.EditValue.ToString()));
+            dotKham.updateGhiChu(DotKhamID, txtGhiChu.Text);
+            dotKham.updateLoiDan(DotKhamID, txtLoiDan.Text);
+            if (chkBaoHiem.Checked)
+            {
+                if (cboGoiKSK.EditValue == null || cboGoiKSK.EditValue.ToString().Length == 0)
+                {
+                    MessageBox.Show("Chưa chọn gói khám sức khỏe!");
+                    cboGoiKSK.Focus();
+                }
+                else
+                {
+                    DataRowView drv = (DataRowView)bindingGoiKSK[bindingGoiKSK.Find("GoiKSKID", cboGoiKSK.EditValue)];
+                    if (drv != null)
+                        dotKham.updateBaoHiem(DotKhamID, 1, Int64.Parse(cboGoiKSK.EditValue.ToString()), double.Parse(drv["SoTien"].ToString()));
+                }
+            }
+            else
+                dotKham.updateBaoHiem(DotKhamID, 0, 0, 0);
             showSTT();
             loadData();
             loadCacLanKham();
@@ -267,11 +319,17 @@ namespace PKDK.KhamBenh
 
         private void btnSaveThuoc_Click(object sender, EventArgs e)
         {
+            //if (DateTime.Compare(DateTime.Today, NgayKham.Date) != 0)
+            //{
+            //    MessageBox.Show("Không thể cập nhật đơn thuốc cũ!", "Khám bệnh");
+            //    return;
+            //}
             saveDotKham();
-            donThuoc.saveData(DotKhamID, cboPhongKham.EditValue.ToString(), txtTenSP.EditValue.ToString(), float.Parse(txtSoLuong.EditValue.ToString()), float.Parse(txtDonGia.Text.ToString()), txtCachDung.Text);
+            if (txtTenSP.EditValue != null && txtSoLuong.Value > 0 && txtDonGia.Text.Length > 0)
+                chiDinh.saveData(DotKhamID, cboPhongKham.EditValue.ToString(), txtTenSP.EditValue.ToString(), float.Parse(txtSoLuong.EditValue.ToString()), float.Parse(txtDonGia.Text.ToString()), txtCachDung.Text);
             loadChiTietDon();
             ucChiPhi1.loadData(DotKhamID);
-            btnNewThuoc.Focus();
+            btnNewThuoc_Click(null, null);
         }
         private void loadDotKham()
         {
@@ -287,8 +345,15 @@ namespace PKDK.KhamBenh
                 txtHuyetAp.Text = dr["HuyetAp"].ToString();
                 txtNhietDo.Text = dr["NhietDo"].ToString();
                 txtSoTT.Text = dr["STT"].ToString();
+                txtGhiChu.Text = dr["GhiChu"].ToString();
+                txtLoiDan.Text = dr["LoiDan"].ToString();
+                chkBaoHiem.Checked = dr["BaoHiem"].ToString() == "1" ? true : false;
+                cboGoiKSK.EditValue = dr["GoiKSKID"];
                 if (dr["NgayTK"] != DBNull.Value)
+                {
+
                     lblNgayTK.Text = DateTime.Parse(dr["NgayTK"].ToString()).ToString("dd/MM/yyyy");
+                }
             }
             else
             {
@@ -298,12 +363,16 @@ namespace PKDK.KhamBenh
                 txtHuyetAp.Text = "";
                 txtNhietDo.Text = "";
                 txtSoTT.Text = "";
+                txtGhiChu.Text = "";
+                txtLoiDan.Text = "";
+                chkBaoHiem.Checked = false;
             }
             loadBenhNhan();
         }
 
         private void txtDiaChi_Validated(object sender, EventArgs e)
         {
+            if (txtDiaChi.Text.Trim().Length == 0) return;
             DataView dv = dvhc.getDVHC(txtDiaChi.Text.Trim()).DefaultView;
             Int32 index = dv.Count;
             if (index == 1)
@@ -327,14 +396,22 @@ namespace PKDK.KhamBenh
 
         private void btnBenhNhanMoi_Click(object sender, EventArgs e)
         {
+            btnNewThuoc_Click(null, null);
             newData();
             loadCacLanKham();
+            loadChiTietDon();
             txtMaBN.Focus();
         }
 
         private void btnNewThuoc_Click(object sender, EventArgs e)
         {
-            txtTenSP.ShowPopup();
+            txtCachDung.Text = "";
+            txtTenSP.EditValue = "";
+            txtSoLuong.Value = 0;
+            txtDonGia.Text = "";
+            txtDonVi.Text = "";
+            txtTenSP.Focus();
+            //txtTenSP.ShowPopup();
         }
 
         private void btnChiDinh_Click(object sender, EventArgs e)
@@ -359,7 +436,7 @@ namespace PKDK.KhamBenh
                 DataView dv = chiTietMau.getDataTable(frm.BenhID).DefaultView;
                 foreach (DataRowView drv in dv)
                 {
-                    donThuoc.saveData(DotKhamID, cboPhongKham.EditValue.ToString(), drv["MaSP"].ToString(), float.Parse(drv["SoLuong"].ToString()), float.Parse(drv["GiaXuat"].ToString()), drv["CachDung"].ToString());
+                    chiDinh.saveData(DotKhamID, cboPhongKham.EditValue.ToString(), drv["GIADVID"].ToString(), float.Parse(drv["SoLuong"].ToString()), float.Parse(drv["DONGIA"].ToString()), drv["CachDung"].ToString());
                 }
                 loadChiTietDon();
             }
@@ -369,16 +446,22 @@ namespace PKDK.KhamBenh
         {
             if (txtTenSP.EditValue != null)
             {
-                DataRowView drv = (DataRowView)bindingSanPham[bindingSanPham.Find("MASP", txtTenSP.EditValue.ToString())];
-                if (drv != null)
+                Int32 index = bindingGiaDichVu.Find("GIADVID", txtTenSP.EditValue.ToString());
+                if (index >= 0)
                 {
-                    txtDonGia.Text = drv["GiaXuat"].ToString();
-                    txtDonVi.Text = drv["TenDonVi"].ToString();
-                }
-                else
-                {
-                    txtDonVi.Text = "";
-                    txtDonGia.Text = "";
+                    DataRowView drv = (DataRowView)bindingGiaDichVu[index];
+                    if (drv != null)
+                    {
+                        txtDonGia.Text = drv["DonGia"].ToString();
+                        txtDonVi.Text = drv["DonVi"].ToString();
+                        txtCachDung.Text = drv["CachDung"].ToString();
+                    }
+                    else
+                    {
+                        txtDonVi.Text = "";
+                        txtDonGia.Text = "";
+                        txtCachDung.Text = "";
+                    }
                 }
             }
         }
@@ -388,8 +471,9 @@ namespace PKDK.KhamBenh
             DataRowView drv = (DataRowView)bindingDonThuoc.Current;
             if (drv != null)
             {
-                donThuoc.deleteData(DotKhamID, cboPhongKham.EditValue.ToString(), drv["MaSP"].ToString());
+                chiDinh.deleteData(DotKhamID, cboPhongKham.EditValue.ToString(), drv["GIADVID"].ToString());
                 loadChiTietDon();
+                btnNewThuoc_Click(null, null);
             }
         }
 
@@ -404,15 +488,16 @@ namespace PKDK.KhamBenh
 
         private void btnPrintThuoc_Click(object sender, EventArgs e)
         {
-            FrmInDonThuoc frm = new FrmInDonThuoc();
-            frm.loadData(DotKhamID);
-            frm.WindowState = FormWindowState.Maximized;
-            frm.ShowDialog();
+            DonThuocUngBuou report = new DonThuocUngBuou();
+            report.DataSource = chiDinh.getDonThuoc(DotKhamID).DefaultView;
+            report.Parameters["pSoTien"].Value = Math.Round(ucChiPhi1.TongSoTien / 1000, 0).ToString();
+            report.ShowPreviewDialog();
         }
 
         private void bindingDonThuoc_ListChanged(object sender, ListChangedEventArgs e)
         {
             ucChiPhi1.loadData(DotKhamID);
+            lblTongSoThuoc.Text = bindingDonThuoc.Count.ToString();
         }
 
         private void btnCopyDon_Click(object sender, EventArgs e)
@@ -422,10 +507,10 @@ namespace PKDK.KhamBenh
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 saveDotKham();
-                DataView dv = donThuoc.getDataTable(frm.DotKhamID).DefaultView;
+                DataView dv = chiDinh.getDataTable(frm.DotKhamID, "01").DefaultView;
                 foreach (DataRowView drv in dv)
                 {
-                    donThuoc.saveData(DotKhamID, cboPhongKham.EditValue.ToString(), drv["MaSP"].ToString(), float.Parse(drv["SoLuong"].ToString()), float.Parse(drv["DonGia"].ToString()), drv["CachDung"].ToString());
+                    chiDinh.saveData(DotKhamID, cboPhongKham.EditValue.ToString(), drv["GIADVID"].ToString(), float.Parse(drv["SoLuong"].ToString()), float.Parse(drv["DonGia"].ToString()), drv["CachDung"].ToString());
                 }
                 loadChiTietDon();
                 ucChiPhi1.loadData(DotKhamID);
@@ -442,6 +527,82 @@ namespace PKDK.KhamBenh
                 txtMaBN_Validated(null, null);
                 txtChanDoan.Focus();
             }
+        }
+
+        private void txtTaiKhamSau_Validated(object sender, EventArgs e)
+        {
+            btnSaveThuoc.Focus();
+        }
+
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            DotKhamID = e.Node.Tag.ToString();
+            loadData();
+        }
+
+        private void btnBenhNhanLabel_Click(object sender, EventArgs e)
+        {
+            BenhNhanLabel report = new BenhNhanLabel();
+            report.DataSource = benhNhan.getDataRow(txtMaBN.Text).Table;
+            if (chkPrint.Checked)
+                report.ShowPreviewDialog();
+            else
+                report.Print();
+        }
+
+        private void btnKetQuaCD_Click(object sender, EventArgs e)
+        {
+            FrmKetQuaCD frm = new FrmKetQuaCD();
+            frm.MaBN = txtMaBN.Text;
+            frm.ShowDialog();
+        }
+
+        private void lnkGiayGioiThieu_Click(object sender, EventArgs e)
+        {
+            FrmGiayGioiThieu frm = new FrmGiayGioiThieu();
+            frm.MaBN = txtMaBN.Text;
+            frm.DotKhamID = DotKhamID;
+            frm.PhongKhamID = cboPhongKham.EditValue.ToString();
+            frm.ShowDialog();
+        }
+
+        private void txtCachDung_EditValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gridThuoc_DoubleClick(object sender, EventArgs e)
+        {
+            DataRowView drv = (DataRowView)bindingDonThuoc.Current;
+            if (drv != null)
+            {
+                FrmUpdateCachDung frm = new FrmUpdateCachDung();
+                frm.DotKhamID = DotKhamID;
+                frm.PhongKhamID = cboPhongKham.EditValue.ToString();
+                frm.GiaDVID = drv["GiaDVID"].ToString();
+                frm.SoLuong = Decimal.Parse(drv["SoLuong"].ToString());
+                frm.CachDung = drv["CachDung"].ToString();
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    loadChiTietDon();
+                }
+            }
+        }
+
+        private void btnGetKetQua_Click(object sender, EventArgs e)
+        {
+            String m_KetQua = chiDinh.getKetQuaDotKham(DotKhamID);
+            if (m_KetQua.Length > 0)
+                txtChanDoan.Text += "/ " + m_KetQua;
+        }
+
+        private void btnFind_Click(object sender, EventArgs e)
+        {
+            KhamBenh.FrmListBenhNhan frm = new KhamBenh.FrmListBenhNhan();
+            //frm.MdiParent = this;
+            //frm.WindowState = FormWindowState.Maximized;
+            this.DestroyHandle();
+            frm.ShowDialog();
         }
     }
 }

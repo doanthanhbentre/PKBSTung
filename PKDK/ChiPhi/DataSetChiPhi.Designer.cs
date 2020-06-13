@@ -334,6 +334,12 @@ namespace PKDK.ChiPhi {
             
             private global::System.Data.DataColumn columnSoTien;
             
+            private global::System.Data.DataColumn columnDienThoai;
+            
+            private global::System.Data.DataColumn columnHuyetAp;
+            
+            private global::System.Data.DataColumn columnMach;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public PhieuThuDataTable() {
@@ -449,6 +455,30 @@ namespace PKDK.ChiPhi {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DienThoaiColumn {
+                get {
+                    return this.columnDienThoai;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn HuyetApColumn {
+                get {
+                    return this.columnHuyetAp;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn MachColumn {
+                get {
+                    return this.columnMach;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -484,7 +514,7 @@ namespace PKDK.ChiPhi {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public PhieuThuRow AddPhieuThuRow(string MaBN, string HoTen, short NamSinh, string DiaChi, string GioiTinh, string ChanDoan, string DotKhamID, short STT, string TenDV, double SoTien) {
+            public PhieuThuRow AddPhieuThuRow(string MaBN, string HoTen, short NamSinh, string DiaChi, string GioiTinh, string ChanDoan, string DotKhamID, short STT, string TenDV, double SoTien, string DienThoai, string HuyetAp, string Mach) {
                 PhieuThuRow rowPhieuThuRow = ((PhieuThuRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         MaBN,
@@ -496,7 +526,10 @@ namespace PKDK.ChiPhi {
                         DotKhamID,
                         STT,
                         TenDV,
-                        SoTien};
+                        SoTien,
+                        DienThoai,
+                        HuyetAp,
+                        Mach};
                 rowPhieuThuRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPhieuThuRow);
                 return rowPhieuThuRow;
@@ -529,6 +562,9 @@ namespace PKDK.ChiPhi {
                 this.columnSTT = base.Columns["STT"];
                 this.columnTenDV = base.Columns["TenDV"];
                 this.columnSoTien = base.Columns["SoTien"];
+                this.columnDienThoai = base.Columns["DienThoai"];
+                this.columnHuyetAp = base.Columns["HuyetAp"];
+                this.columnMach = base.Columns["Mach"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -554,6 +590,12 @@ namespace PKDK.ChiPhi {
                 base.Columns.Add(this.columnTenDV);
                 this.columnSoTien = new global::System.Data.DataColumn("SoTien", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSoTien);
+                this.columnDienThoai = new global::System.Data.DataColumn("DienThoai", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDienThoai);
+                this.columnHuyetAp = new global::System.Data.DataColumn("HuyetAp", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnHuyetAp);
+                this.columnMach = new global::System.Data.DataColumn("Mach", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnMach);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1187,6 +1229,54 @@ namespace PKDK.ChiPhi {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string DienThoai {
+                get {
+                    try {
+                        return ((string)(this[this.tablePhieuThu.DienThoaiColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'DienThoai\' in table \'PhieuThu\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePhieuThu.DienThoaiColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string HuyetAp {
+                get {
+                    try {
+                        return ((string)(this[this.tablePhieuThu.HuyetApColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'HuyetAp\' in table \'PhieuThu\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePhieuThu.HuyetApColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Mach {
+                get {
+                    try {
+                        return ((string)(this[this.tablePhieuThu.MachColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Mach\' in table \'PhieuThu\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablePhieuThu.MachColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsMaBNNull() {
                 return this.IsNull(this.tablePhieuThu.MaBNColumn);
             }
@@ -1303,6 +1393,42 @@ namespace PKDK.ChiPhi {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetSoTienNull() {
                 this[this.tablePhieuThu.SoTienColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsDienThoaiNull() {
+                return this.IsNull(this.tablePhieuThu.DienThoaiColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetDienThoaiNull() {
+                this[this.tablePhieuThu.DienThoaiColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsHuyetApNull() {
+                return this.IsNull(this.tablePhieuThu.HuyetApColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetHuyetApNull() {
+                this[this.tablePhieuThu.HuyetApColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsMachNull() {
+                return this.IsNull(this.tablePhieuThu.MachColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetMachNull() {
+                this[this.tablePhieuThu.MachColumn] = global::System.Convert.DBNull;
             }
         }
         

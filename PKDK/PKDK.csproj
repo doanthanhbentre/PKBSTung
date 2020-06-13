@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>phongkhamlachong_9sn_icon.ico</ApplicationIcon>
+    <ApplicationIcon>nurse-icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.BonusSkins.v17.1" />
@@ -62,9 +62,6 @@
     <Reference Include="DevExpress.XtraScheduler.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraScheduler.v17.1.Core, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraTreeList.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="LibDataDB2">
-      <HintPath>..\..\..\LibDataDB2\bin\Debug\LibDataDB2.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
@@ -126,6 +123,12 @@
     <Compile Include="ChiPhi\FrmInTKDichVu.Designer.cs">
       <DependentUpon>FrmInTKDichVu.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChiPhi\FrmMatKhau.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChiPhi\FrmMatKhau.Designer.cs">
+      <DependentUpon>FrmMatKhau.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChiPhi\PhieuThu.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -144,17 +147,19 @@
     <Compile Include="ChiPhi\UcChiPhi.Designer.cs">
       <DependentUpon>UcChiPhi.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataAccess\DonThuoc.cs" />
+    <Compile Include="DataAccess\GoiKSK.cs" />
     <Compile Include="DataAccess\BacSi.cs" />
     <Compile Include="DataAccess\Benh.cs" />
     <Compile Include="DataAccess\BenhNhan.cs" />
     <Compile Include="DataAccess\ChiDinh.cs" />
     <Compile Include="DataAccess\ChiPhi.cs" />
     <Compile Include="DataAccess\ChiTietGoiDV.cs" />
+    <Compile Include="DataAccess\DonThuoc.cs" />
     <Compile Include="DataAccess\DonThuocMau.cs" />
     <Compile Include="DataAccess\DonVi.cs" />
     <Compile Include="DataAccess\DotKham.cs" />
     <Compile Include="DataAccess\DVHC.cs" />
+    <Compile Include="DataAccess\GiayGioiThieu.cs" />
     <Compile Include="DataAccess\GoiDichVu.cs" />
     <Compile Include="DataAccess\KetQuaCD.cs" />
     <Compile Include="DataAccess\KQSieuAm.cs" />
@@ -162,10 +167,8 @@
     <Compile Include="DataAccess\NguoiDung.cs" />
     <Compile Include="DataAccess\PhieuDichVu.cs" />
     <Compile Include="DataAccess\PhieuThu.cs" />
-    <Compile Include="DataAccess\PhieuThuChiTiet.cs" />
     <Compile Include="DataAccess\PhongKham.cs" />
     <Compile Include="DataAccess\GiaDichVu.cs" />
-    <Compile Include="DataAccess\SanPham.cs" />
     <Compile Include="DataAccess\SoKhamBenh.cs" />
     <Compile Include="DataAccess\ThongKe.cs" />
     <Compile Include="DataAccess\ThongTinPK.cs" />
@@ -198,11 +201,29 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSetKhamBenh.xsd</DependentUpon>
     </Compile>
-    <Compile Include="KhamBenh\DonThuoc.cs">
+    <Compile Include="KhamBenh\FrmChonSoCLS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KhamBenh\FrmChonSoCLS.Designer.cs">
+      <DependentUpon>FrmChonSoCLS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhamBenh\FrmUpdateCachDung.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KhamBenh\FrmUpdateCachDung.Designer.cs">
+      <DependentUpon>FrmUpdateCachDung.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhamBenh\GiayGioiThieu.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="KhamBenh\DonThuoc.Designer.cs">
-      <DependentUpon>DonThuoc.cs</DependentUpon>
+    <Compile Include="KhamBenh\GiayGioiThieu.Designer.cs">
+      <DependentUpon>GiayGioiThieu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhamBenh\DonThuocUngBuou.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="KhamBenh\DonThuocUngBuou.Designer.cs">
+      <DependentUpon>DonThuocUngBuou.cs</DependentUpon>
     </Compile>
     <Compile Include="KhamBenh\FrmChiDinh.cs">
       <SubType>Form</SubType>
@@ -246,23 +267,23 @@
     <Compile Include="KhamBenh\FrmDonTruoc.Designer.cs">
       <DependentUpon>FrmDonTruoc.cs</DependentUpon>
     </Compile>
-    <Compile Include="KhamBenh\FrmInDonThuoc.cs">
+    <Compile Include="KhamBenh\FrmGiayGioiThieu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KhamBenh\FrmInDonThuoc.Designer.cs">
-      <DependentUpon>FrmInDonThuoc.cs</DependentUpon>
-    </Compile>
-    <Compile Include="KhamBenh\FrmInPhieuChiDinh.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="KhamBenh\FrmInPhieuChiDinh.Designer.cs">
-      <DependentUpon>FrmInPhieuChiDinh.cs</DependentUpon>
+    <Compile Include="KhamBenh\FrmGiayGioiThieu.Designer.cs">
+      <DependentUpon>FrmGiayGioiThieu.cs</DependentUpon>
     </Compile>
     <Compile Include="KhamBenh\FrmInSoKhamBenh_A1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="KhamBenh\FrmInSoKhamBenh_A1.Designer.cs">
       <DependentUpon>FrmInSoKhamBenh_A1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhamBenh\FrmKetQuaCD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KhamBenh\FrmKetQuaCD.Designer.cs">
+      <DependentUpon>FrmKetQuaCD.cs</DependentUpon>
     </Compile>
     <Compile Include="KhamBenh\FrmLieuDung.cs">
       <SubType>Form</SubType>
@@ -300,11 +321,29 @@
     <Compile Include="KhamBenh\PhieuChiDinh.Designer.cs">
       <DependentUpon>PhieuChiDinh.cs</DependentUpon>
     </Compile>
+    <Compile Include="KhamBenh\BenhNhanLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="KhamBenh\BenhNhanLabel.Designer.cs">
+      <DependentUpon>BenhNhanLabel.cs</DependentUpon>
+    </Compile>
     <Compile Include="KhamBenh\SoKhamBenh_A1.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="KhamBenh\SoKhamBenh_A1.Designer.cs">
       <DependentUpon>SoKhamBenh_A1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KhamBenh\SoKSK.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="KhamBenh\SoKSK.Designer.cs">
+      <DependentUpon>SoKSK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ThietLap\FrmGoiKSK.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThietLap\FrmGoiKSK.Designer.cs">
+      <DependentUpon>FrmGoiKSK.cs</DependentUpon>
     </Compile>
     <Compile Include="ThietLap\FrmChiTietGoiDV.cs">
       <SubType>Form</SubType>
@@ -317,6 +356,12 @@
     </Compile>
     <Compile Include="ThietLap\FrmDonThuocMau.Designer.cs">
       <DependentUpon>FrmDonThuocMau.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ThietLap\FrmThuoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThietLap\FrmThuoc.Designer.cs">
+      <DependentUpon>FrmThuoc.cs</DependentUpon>
     </Compile>
     <Compile Include="ThietLap\FrmGoiDichVu.cs">
       <SubType>Form</SubType>
@@ -362,11 +407,11 @@
     <Compile Include="ThietLap\FrmBacSi.Designer.cs">
       <DependentUpon>FrmBacSi.cs</DependentUpon>
     </Compile>
-    <Compile Include="ThietLap\FrmSanPham.cs">
+    <Compile Include="ThietLap\FrmXaPhuong.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ThietLap\FrmSanPham.Designer.cs">
-      <DependentUpon>FrmSanPham.cs</DependentUpon>
+    <Compile Include="ThietLap\FrmXaPhuong.Designer.cs">
+      <DependentUpon>FrmXaPhuong.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="ChiPhi\FrmChiPhi.resx">
       <DependentUpon>FrmChiPhi.cs</DependentUpon>
@@ -389,6 +434,9 @@
     <EmbeddedResource Include="ChiPhi\FrmInTKDichVu.resx">
       <DependentUpon>FrmInTKDichVu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ChiPhi\FrmMatKhau.resx">
+      <DependentUpon>FrmMatKhau.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ChiPhi\PhieuThu.resx">
       <DependentUpon>PhieuThu.cs</DependentUpon>
     </EmbeddedResource>
@@ -410,8 +458,17 @@
     <EmbeddedResource Include="HeThong\FrmThoiGian.resx">
       <DependentUpon>FrmThoiGian.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KhamBenh\DonThuoc.resx">
-      <DependentUpon>DonThuoc.cs</DependentUpon>
+    <EmbeddedResource Include="KhamBenh\FrmChonSoCLS.resx">
+      <DependentUpon>FrmChonSoCLS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhamBenh\FrmUpdateCachDung.resx">
+      <DependentUpon>FrmUpdateCachDung.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhamBenh\GiayGioiThieu.resx">
+      <DependentUpon>GiayGioiThieu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhamBenh\DonThuocUngBuou.resx">
+      <DependentUpon>DonThuocUngBuou.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="KhamBenh\FrmChiDinh.resx">
       <DependentUpon>FrmChiDinh.cs</DependentUpon>
@@ -434,14 +491,14 @@
     <EmbeddedResource Include="KhamBenh\FrmDonTruoc.resx">
       <DependentUpon>FrmDonTruoc.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="KhamBenh\FrmInDonThuoc.resx">
-      <DependentUpon>FrmInDonThuoc.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="KhamBenh\FrmInPhieuChiDinh.resx">
-      <DependentUpon>FrmInPhieuChiDinh.cs</DependentUpon>
+    <EmbeddedResource Include="KhamBenh\FrmGiayGioiThieu.resx">
+      <DependentUpon>FrmGiayGioiThieu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="KhamBenh\FrmInSoKhamBenh_A1.resx">
       <DependentUpon>FrmInSoKhamBenh_A1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhamBenh\FrmKetQuaCD.resx">
+      <DependentUpon>FrmKetQuaCD.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="KhamBenh\FrmLieuDung.resx">
       <DependentUpon>FrmLieuDung.cs</DependentUpon>
@@ -461,14 +518,26 @@
     <EmbeddedResource Include="KhamBenh\PhieuChiDinh.resx">
       <DependentUpon>PhieuChiDinh.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="KhamBenh\BenhNhanLabel.resx">
+      <DependentUpon>BenhNhanLabel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="KhamBenh\SoKhamBenh_A1.resx">
       <DependentUpon>SoKhamBenh_A1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KhamBenh\SoKSK.resx">
+      <DependentUpon>SoKSK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ThietLap\FrmGoiKSK.resx">
+      <DependentUpon>FrmGoiKSK.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ThietLap\FrmChiTietGoiDV.resx">
       <DependentUpon>FrmChiTietGoiDV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ThietLap\FrmDonThuocMau.resx">
       <DependentUpon>FrmDonThuocMau.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ThietLap\FrmThuoc.resx">
+      <DependentUpon>FrmThuoc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ThietLap\FrmGoiDichVu.resx">
       <DependentUpon>FrmGoiDichVu.cs</DependentUpon>
@@ -502,8 +571,8 @@
     <EmbeddedResource Include="ThietLap\FrmBacSi.resx">
       <DependentUpon>FrmBacSi.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ThietLap\FrmSanPham.resx">
-      <DependentUpon>FrmSanPham.cs</DependentUpon>
+    <EmbeddedResource Include="ThietLap\FrmXaPhuong.resx">
+      <DependentUpon>FrmXaPhuong.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
     <None Include="ChiPhi\DataSetChiPhi.xsc">
@@ -548,11 +617,21 @@
     <None Include="Resources\1416573149_User.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="phongkhamlachong_9sn_icon.ico" />
-    <None Include="Resources\LacHong.jpg" />
+    <Content Include="nurse-icon.ico" />
+    <None Include="Resources\PKBSLINH.jpg" />
+    <None Include="Resources\PKBSHuu_BangHieu.png" />
     <None Include="Resources\120px-Medicine_Drugs.svg.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\LibDataDB2\LibDataDB2.csproj">
+      <Project>{bb019d05-9442-4b10-bff0-27c56a8033c4}</Project>
+      <Name>LibDataDB2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\LibNumRead\LibNumRead\LibNumRead.vbproj">
+      <Project>{e46e9036-4400-4f0e-a636-c8c7b786017e}</Project>
+      <Name>LibNumRead</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

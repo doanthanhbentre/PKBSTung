@@ -25,10 +25,10 @@ namespace QLPK.DataAccess
             data.CommandType = System.Data.CommandType.Text;
             data.ExecuteNonQuery();
         }
-        public void deleteData(String benhID, String maSP)
+        public void deleteData(String benhID, String giaDVID)
         {
             LibDataDB2.ASDataProvider data = new LibDataDB2.ASDataProvider();
-            String m_SQL = "Delete From PKDK.DonThuocMau Where benhID = '" + benhID + "' And MaSP = '" + maSP + "'";
+            String m_SQL = "Delete From PKDK.DonThuocMau Where benhID = '" + benhID + "' And GIADVID = '" + giaDVID + "'";
             data.CommandText = m_SQL;
             data.CommandType = System.Data.CommandType.Text;
             data.ExecuteNonQuery();
@@ -45,7 +45,7 @@ namespace QLPK.DataAccess
         public DataTable getDataTable(String benhID)
         {
             LibDataDB2.ASDataProvider data = new LibDataDB2.ASDataProvider();
-            String m_SQL = "Select CT.BenhID, SP.MaSP, SP.TenSP, DV.TenDonVi, CT.SoLuong, CT.CachDung, SP.GiaXuat From PKDK.DonThuocMau CT Inner Join Duoc.SanPham SP On CT.MaSP = SP.MaSP Join Duoc.DonVi DV on SP.DonViID = DV.DonViID ";
+            String m_SQL = "Select DM.BenhID, DV.GIADVID, DV.TENDV, DV.DonVi, DM.SoLuong, DM.CachDung, DV.DONGIA From PKDK.DonThuocMau DM Inner Join PKDK.GIADICHVU DV On DM.GIADVID = DV.GIADVID ";
             m_SQL += "Where benhID = '" + benhID.ToString() + "'";
             data.CommandText = m_SQL;
             data.CommandType = System.Data.CommandType.Text;

@@ -28,5 +28,28 @@ namespace PKDK.KhamBenh
         {
             bindingSource1.DataSource = benhNhan.getDataTable();
         }
+
+        private void btnDangKyKham_Click(object sender, EventArgs e)
+        {
+            DataRowView drv = (DataRowView)bindingSource1.Current;
+            if (drv != null)
+            {
+                FrmPhieuKham frm = new FrmPhieuKham();
+                frm.MaBN = drv["MaBN"].ToString();
+                this.DestroyHandle();
+                frm.ShowDialog();
+            }
+
+        }
+
+        private void gridControl1_DoubleClick(object sender, EventArgs e)
+        {
+            btnDangKyKham_Click(null, null);
+        }
+
+        private void bindingSource1_ListChanged(object sender, ListChangedEventArgs e)
+        {
+            lblTongSo.Text = bindingSource1.Count.ToString();
+        }
     }
 }

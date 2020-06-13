@@ -39,8 +39,15 @@ namespace PKDK.KhamBenh
             DataRowView drv = (DataRowView)bindingSource1.Current;
             if (drv != null)
             {
-                dotKham.deleteData(drv["DotKhamID"].ToString());
-                loadData();
+                if (MessageBox.Show("Xóa " + drv["HoTen"].ToString() + " phải không?", "Thông báo xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                {
+                    QLPK.DataAccess.ChiDinh chiDinh = new QLPK.DataAccess.ChiDinh();
+                    DataAccess.GiayGioiThieu giayGT = new DataAccess.GiayGioiThieu();
+                    chiDinh.deleteData(drv["DotKhamID"].ToString());
+                    giayGT.deleteDotKham(drv["DotKhamID"].ToString());
+                    dotKham.deleteData(drv["DotKhamID"].ToString());
+                    loadData();
+                }
             }
         }
 
@@ -52,6 +59,7 @@ namespace PKDK.KhamBenh
         private void btnNew_Click(object sender, EventArgs e)
         {
             FrmPhieuKham frm = new FrmPhieuKham();
+            frm.NgayKham = DateTime.Now;
             frm.ShowDialog();
             loadData();
         }
@@ -74,6 +82,11 @@ namespace PKDK.KhamBenh
             lblTongSo.Text = m_Total.ToString();
             btnDelete.Enabled = m_Total > 0;
             btnEdit.Enabled = m_Total > 0;
+        }
+
+        private void gridControl1_DoubleClick(object sender, EventArgs e)
+        {
+            btnEdit_Click(null, null);
         }
     }
 }

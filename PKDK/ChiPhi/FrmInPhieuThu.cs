@@ -27,5 +27,10 @@ namespace PKDK.ChiPhi
             report.CreateDocument();
             documentViewer1.DocumentSource = report;
         }
+
+        private void FrmInPhieuThu_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

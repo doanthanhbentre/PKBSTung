@@ -13,7 +13,7 @@ namespace PKDK.ThietLap
 {
     public partial class FrmDonThuocMau : DevExpress.XtraEditors.XtraForm
     {
-        DataAccess.SanPham sanPham = new DataAccess.SanPham();
+        QLPK.DataAccess.GiaDichVu giaDichVu = new QLPK.DataAccess.GiaDichVu();
         QLPK.DataAccess.Benh benh = new QLPK.DataAccess.Benh();
         QLPK.DataAccess.DonThuocMau donMau = new QLPK.DataAccess.DonThuocMau();
         public FrmDonThuocMau()
@@ -38,7 +38,7 @@ namespace PKDK.ThietLap
         private void loadData()
         {
             bindingBenh.DataSource = benh.getDataTable();
-            bindingSanPham.DataSource = sanPham.getDataTable();
+            bindingGiaDichVu.DataSource = giaDichVu.getDataTable("01");
         }
         private void loadDonThuoc()
         {
@@ -63,33 +63,20 @@ namespace PKDK.ThietLap
         {
             txtDonGia.Text = "";
             txtSoLuong.EditValue = 0;
-            txtTenSP.ShowPopup();
+            txtTenDV.ShowPopup();
         }
 
         private void txtTenSP_EditValueChanged(object sender, EventArgs e)
         {
-            if (txtTenSP.EditValue != null)
-            {
-                DataRowView drv = (DataRowView)bindingSanPham[bindingSanPham.Find("MASP", txtTenSP.EditValue.ToString())];
-                if (drv != null)
-                {
-                    txtDonGia.Text = drv["GiaXuat"].ToString();
-                    txtDonVi.Text = drv["TenDonVi"].ToString();
-                }
-                else
-                {
-                    txtDonVi.Text = "";
-                    txtDonGia.Text = "";
-                }
-            }
+
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             DataRowView drv = (DataRowView)bindingBenh.Current;
-            if (drv != null && txtTenSP.EditValue != null)
+            if (drv != null && txtTenDV.EditValue != null)
             {
-                donMau.saveData(drv["BenhID"].ToString(), txtTenSP.EditValue.ToString(), txtCachDung.Text, Int16.Parse(txtSoLuong.EditValue.ToString()));
+                donMau.saveData(drv["BenhID"].ToString(), txtTenDV.EditValue.ToString(), txtCachDung.Text, Int16.Parse(txtSoLuong.EditValue.ToString()));
                 loadDonThuoc();
             }
             btnNew.Focus();
@@ -100,7 +87,7 @@ namespace PKDK.ThietLap
             DataRowView drv = (DataRowView)bindingDonThuoc.Current;
             if (drv != null)
             {
-                donMau.deleteData(drv["BenhID"].ToString(), drv["MaSP"].ToString());
+                donMau.deleteData(drv["BenhID"].ToString(), drv["GIADVID"].ToString());
                 loadDonThuoc();
             }
         }
@@ -114,6 +101,37 @@ namespace PKDK.ThietLap
         {
             Int32 value = bindingDonThuoc.Count;
             btnDelete.Enabled = value > 0;
+        }
+
+        private void bindingDonThuoc_CurrentChanged(object sender, EventArgs e)
+        {
+            DataRowView drv = (DataRowView)bindingDonThuoc.Current;
+            if (drv != null)
+            {
+                txtTenDV.EditValue = drv["GiaDVID"];
+                txtDonVi.Text = drv["DonVi"].ToString();
+                txtDonGia.Text = drv["DonGia"].ToString();
+                txtSoLuong.Value = Decimal.Parse(drv["SoLuong"].ToString());
+                txtCachDung.Text = drv["CachDung"].ToString();
+            }
+        }
+
+        private void txtTenDV_Validated(object sender, EventArgs e)
+        {
+            if (txtTenDV.EditValue != null)
+            {
+                DataRowView drv = (DataRowView)bindingGiaDichVu[bindingGiaDichVu.Find("GIADVID", txtTenDV.EditValue.ToString())];
+                if (drv != null)
+                {
+                    txtDonGia.Text = drv["DonGia"].ToString();
+                    txtDonVi.Text = drv["DonVi"].ToString();
+                }
+                else
+                {
+                    txtDonVi.Text = "";
+                    txtDonGia.Text = "";
+                }
+            }
         }
     }
 }

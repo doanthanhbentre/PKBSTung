@@ -36,7 +36,6 @@
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.btnCachDung = new DevExpress.XtraEditors.SimpleButton();
             this.btnClose = new DevExpress.XtraEditors.SimpleButton();
             this.btnDelete = new DevExpress.XtraEditors.SimpleButton();
             this.btnSave = new DevExpress.XtraEditors.SimpleButton();
@@ -45,8 +44,8 @@
             this.txtCachDung = new DevExpress.XtraEditors.TextEdit();
             this.txtDonGia = new DevExpress.XtraEditors.TextEdit();
             this.txtDonVi = new DevExpress.XtraEditors.TextEdit();
-            this.txtTenSP = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.bindingSanPham = new System.Windows.Forms.BindingSource(this.components);
+            this.txtTenDV = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.bindingGiaDichVu = new System.Windows.Forms.BindingSource(this.components);
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
@@ -64,6 +63,7 @@
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnCachDung = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
@@ -75,8 +75,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCachDung.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDonGia.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDonVi.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTenSP.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSanPham)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTenDV.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingGiaDichVu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
@@ -140,7 +140,7 @@
             this.panelControl1.Controls.Add(this.txtCachDung);
             this.panelControl1.Controls.Add(this.txtDonGia);
             this.panelControl1.Controls.Add(this.txtDonVi);
-            this.panelControl1.Controls.Add(this.txtTenSP);
+            this.panelControl1.Controls.Add(this.txtTenDV);
             this.panelControl1.Controls.Add(this.labelControl4);
             this.panelControl1.Controls.Add(this.labelControl3);
             this.panelControl1.Controls.Add(this.labelControl2);
@@ -150,18 +150,7 @@
             this.panelControl1.Location = new System.Drawing.Point(285, 287);
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(524, 124);
-            this.panelControl1.TabIndex = 1;
-            // 
-            // btnCachDung
-            // 
-            this.btnCachDung.AutoSize = true;
-            this.btnCachDung.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnCachDung.ImageOptions.Image")));
-            this.btnCachDung.Location = new System.Drawing.Point(495, 47);
-            this.btnCachDung.Name = "btnCachDung";
-            this.btnCachDung.Size = new System.Drawing.Size(24, 22);
-            this.btnCachDung.TabIndex = 10;
-            this.btnCachDung.ToolTip = "Lấy cách và liều dùng";
-            this.btnCachDung.Click += new System.EventHandler(this.btnCachDung_Click);
+            this.panelControl1.TabIndex = 2;
             // 
             // btnClose
             // 
@@ -258,20 +247,21 @@
             this.txtDonVi.Size = new System.Drawing.Size(67, 20);
             this.txtDonVi.TabIndex = 3;
             // 
-            // txtTenSP
+            // txtTenDV
             // 
-            this.txtTenSP.Location = new System.Drawing.Point(6, 25);
-            this.txtTenSP.Name = "txtTenSP";
-            this.txtTenSP.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.txtTenDV.Location = new System.Drawing.Point(66, 25);
+            this.txtTenDV.Name = "txtTenDV";
+            this.txtTenDV.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtTenSP.Properties.DataSource = this.bindingSanPham;
-            this.txtTenSP.Properties.DisplayMember = "TENSP";
-            this.txtTenSP.Properties.NullText = "";
-            this.txtTenSP.Properties.ValueMember = "MASP";
-            this.txtTenSP.Properties.View = this.searchLookUpEdit1View;
-            this.txtTenSP.Size = new System.Drawing.Size(289, 20);
-            this.txtTenSP.TabIndex = 1;
-            this.txtTenSP.EditValueChanged += new System.EventHandler(this.txtTenSP_EditValueChanged);
+            this.txtTenDV.Properties.DataSource = this.bindingGiaDichVu;
+            this.txtTenDV.Properties.DisplayMember = "TENDV";
+            this.txtTenDV.Properties.NullText = "";
+            this.txtTenDV.Properties.ValueMember = "GIADVID";
+            this.txtTenDV.Properties.View = this.searchLookUpEdit1View;
+            this.txtTenDV.Size = new System.Drawing.Size(229, 20);
+            this.txtTenDV.TabIndex = 1;
+            this.txtTenDV.EditValueChanged += new System.EventHandler(this.txtTenSP_EditValueChanged);
+            this.txtTenDV.Validated += new System.EventHandler(this.txtTenDV_Validated);
             // 
             // searchLookUpEdit1View
             // 
@@ -285,7 +275,7 @@
             // gridColumn1
             // 
             this.gridColumn1.Caption = "Tên thuốc";
-            this.gridColumn1.FieldName = "TENSP";
+            this.gridColumn1.FieldName = "TENDV";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 0;
@@ -324,7 +314,7 @@
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(6, 6);
+            this.labelControl1.Location = new System.Drawing.Point(8, 28);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(52, 13);
             this.labelControl1.TabIndex = 0;
@@ -337,7 +327,7 @@
             this.groupControl2.Location = new System.Drawing.Point(285, 0);
             this.groupControl2.Name = "groupControl2";
             this.groupControl2.Size = new System.Drawing.Size(524, 287);
-            this.groupControl2.TabIndex = 2;
+            this.groupControl2.TabIndex = 1;
             this.groupControl2.Text = "Đơn thuốc";
             // 
             // gridControl2
@@ -354,6 +344,7 @@
             // 
             // bindingDonThuoc
             // 
+            this.bindingDonThuoc.CurrentChanged += new System.EventHandler(this.bindingDonThuoc_CurrentChanged);
             this.bindingDonThuoc.ListChanged += new System.ComponentModel.ListChangedEventHandler(this.bindingDonThuoc_ListChanged);
             // 
             // gridView2
@@ -373,7 +364,7 @@
             // gridColumn3
             // 
             this.gridColumn3.Caption = "Mã số";
-            this.gridColumn3.FieldName = "MASP";
+            this.gridColumn3.FieldName = "GIADVID";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 0;
@@ -382,7 +373,7 @@
             // gridColumn4
             // 
             this.gridColumn4.Caption = "Tên thuốc";
-            this.gridColumn4.FieldName = "TENSP";
+            this.gridColumn4.FieldName = "TENDV";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 1;
@@ -391,7 +382,7 @@
             // gridColumn5
             // 
             this.gridColumn5.Caption = "Đơn vị";
-            this.gridColumn5.FieldName = "TENDONVI";
+            this.gridColumn5.FieldName = "DONVI";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 2;
@@ -418,8 +409,19 @@
             // gridColumn8
             // 
             this.gridColumn8.Caption = "Đơn giá";
-            this.gridColumn8.FieldName = "GIAXUAT";
+            this.gridColumn8.FieldName = "DONGIA";
             this.gridColumn8.Name = "gridColumn8";
+            // 
+            // btnCachDung
+            // 
+            this.btnCachDung.AutoSize = true;
+            this.btnCachDung.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image")));
+            this.btnCachDung.Location = new System.Drawing.Point(495, 47);
+            this.btnCachDung.Name = "btnCachDung";
+            this.btnCachDung.Size = new System.Drawing.Size(24, 22);
+            this.btnCachDung.TabIndex = 10;
+            this.btnCachDung.ToolTip = "Nhập cách dùng thuốc";
+            this.btnCachDung.Click += new System.EventHandler(this.btnCachDung_Click);
             // 
             // FrmDonThuocMau
             // 
@@ -450,8 +452,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtCachDung.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDonGia.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDonVi.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtTenSP.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSanPham)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtTenDV.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingGiaDichVu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
             this.groupControl2.ResumeLayout(false);
@@ -482,11 +484,10 @@
         private DevExpress.XtraEditors.SimpleButton btnDelete;
         private DevExpress.XtraEditors.SimpleButton btnSave;
         private DevExpress.XtraEditors.SimpleButton btnNew;
-        private DevExpress.XtraEditors.SimpleButton btnCachDung;
         private DevExpress.XtraEditors.TextEdit txtCachDung;
         private DevExpress.XtraEditors.LabelControl labelControl5;
         private System.Windows.Forms.BindingSource bindingBenh;
-        private System.Windows.Forms.BindingSource bindingSanPham;
+        private System.Windows.Forms.BindingSource bindingGiaDichVu;
         private System.Windows.Forms.BindingSource bindingDonThuoc;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
@@ -495,8 +496,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
-        private DevExpress.XtraEditors.SearchLookUpEdit txtTenSP;
+        private DevExpress.XtraEditors.SearchLookUpEdit txtTenDV;
         private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraEditors.SimpleButton btnCachDung;
     }
 }

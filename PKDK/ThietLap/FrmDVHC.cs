@@ -25,26 +25,26 @@ namespace PKDK.ThietLap
         }
         private void loadTinhThanh()
         {
-            bindingSource1.DataSource = dvhc.getTinhThanh();
-            gridTinhThanh.DataSource = bindingSource1;
+            bindingTT.DataSource = dvhc.getTinhThanh();
+            gridTinhThanh.DataSource = bindingTT;
         }
         private void loadQuanHuyen()
         {
-            DataRowView drv = (DataRowView)bindingSource1.Current;
+            DataRowView drv = (DataRowView)bindingTT.Current;
             if (drv != null)
-                bindingSource2.DataSource = dvhc.getQuanHuyen(drv["MaTT"].ToString());
+                bindingQH.DataSource = dvhc.getQuanHuyen(drv["MaTT"].ToString());
             else
-                bindingSource2.DataSource = dvhc.getQuanHuyen("");
-            gridQuanHuyen.DataSource = bindingSource2;
+                bindingQH.DataSource = dvhc.getQuanHuyen("");
+            gridQuanHuyen.DataSource = bindingQH;
         }
         private void loadXaPhuong()
         {
-            DataRowView drv = (DataRowView)bindingSource2.Current;
+            DataRowView drv = (DataRowView)bindingQH.Current;
             if (drv != null)
-                bindingSource3.DataSource = dvhc.getXaPhuong(drv["MaQH"].ToString());
+                bindingXP.DataSource = dvhc.getXaPhuong(drv["MaQH"].ToString());
             else
-                bindingSource3.DataSource = dvhc.getXaPhuong("");
-            gridXaPhuong.DataSource = bindingSource3;
+                bindingXP.DataSource = dvhc.getXaPhuong("");
+            gridXaPhuong.DataSource = bindingXP;
         }
         private void FrmDVHC_Load(object sender, EventArgs e)
         {
@@ -59,6 +59,40 @@ namespace PKDK.ThietLap
         private void bindingSource2_CurrentChanged(object sender, EventArgs e)
         {
             loadXaPhuong();
+        }
+
+        private void mnuNewXP_Click(object sender, EventArgs e)
+        {
+            DataRowView drv = (DataRowView)bindingTT.Current;
+            if (drv == null) return;
+            FrmXaPhuong frm = new FrmXaPhuong();
+            frm.MaTT = drv["MaTT"].ToString();
+            frm.Sua = false;
+            frm.ShowDialog();
+            loadXaPhuong();
+        }
+
+        private void mnuEditXP_Click(object sender, EventArgs e)
+        {
+            DataRowView drvTT = (DataRowView)bindingTT.Current;
+            if (drvTT == null) return;
+
+            DataRowView drvXP = (DataRowView)bindingXP.Current;
+            if (drvXP == null) return;
+            FrmXaPhuong frm = new FrmXaPhuong();
+            frm.MaTT = drvTT["MaTT"].ToString();
+            frm.MaXP = drvXP["MaXP"].ToString();
+            frm.MaQH = drvXP["MaQH"].ToString();
+            frm.TenXP = drvXP["TenXP"].ToString();
+            frm.TenTat = drvXP["TenTat"].ToString();
+            frm.Sua = true;
+            frm.ShowDialog();
+            loadXaPhuong();
+        }
+
+        private void bindingXP_ListChanged(object sender, ListChangedEventArgs e)
+        {
+            lblTongXP.Text = bindingXP.Count.ToString();
         }
     }
 }

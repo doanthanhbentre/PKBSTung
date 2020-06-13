@@ -45,7 +45,7 @@
             // 
             // txtTenDangNhap
             // 
-            this.txtTenDangNhap.EditValue = "admin";
+            this.txtTenDangNhap.EditValue = "";
             this.txtTenDangNhap.Location = new System.Drawing.Point(152, 19);
             this.txtTenDangNhap.Name = "txtTenDangNhap";
             this.txtTenDangNhap.Size = new System.Drawing.Size(165, 20);
@@ -53,7 +53,7 @@
             // 
             // txtMatKhau
             // 
-            this.txtMatKhau.EditValue = "1";
+            this.txtMatKhau.EditValue = "";
             this.txtMatKhau.Location = new System.Drawing.Point(152, 42);
             this.txtMatKhau.Name = "txtMatKhau";
             this.txtMatKhau.Properties.UseSystemPasswordChar = true;

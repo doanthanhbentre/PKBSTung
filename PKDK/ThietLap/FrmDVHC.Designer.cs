@@ -47,14 +47,18 @@
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.gridXaPhuong = new DevExpress.XtraGrid.GridControl();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuEditXP = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuNewXP = new System.Windows.Forms.ToolStripMenuItem();
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
-            this.bindingSource3 = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingTT = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingQH = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingXP = new System.Windows.Forms.BindingSource(this.components);
+            this.lblTongXP = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
@@ -68,14 +72,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
             this.groupControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridXaPhuong)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingTT)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingQH)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingXP)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.lblTongXP);
             this.panelControl1.Controls.Add(this.btnClose);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelControl1.Location = new System.Drawing.Point(0, 394);
@@ -109,10 +115,10 @@
             // gridTinhThanh
             // 
             this.gridTinhThanh.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridTinhThanh.Location = new System.Drawing.Point(2, 21);
+            this.gridTinhThanh.Location = new System.Drawing.Point(2, 20);
             this.gridTinhThanh.MainView = this.gridView1;
             this.gridTinhThanh.Name = "gridTinhThanh";
-            this.gridTinhThanh.Size = new System.Drawing.Size(301, 371);
+            this.gridTinhThanh.Size = new System.Drawing.Size(301, 372);
             this.gridTinhThanh.TabIndex = 0;
             this.gridTinhThanh.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -168,10 +174,10 @@
             // gridQuanHuyen
             // 
             this.gridQuanHuyen.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridQuanHuyen.Location = new System.Drawing.Point(2, 21);
+            this.gridQuanHuyen.Location = new System.Drawing.Point(2, 20);
             this.gridQuanHuyen.MainView = this.gridView2;
             this.gridQuanHuyen.Name = "gridQuanHuyen";
-            this.gridQuanHuyen.Size = new System.Drawing.Size(301, 371);
+            this.gridQuanHuyen.Size = new System.Drawing.Size(301, 372);
             this.gridQuanHuyen.TabIndex = 1;
             this.gridQuanHuyen.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -233,14 +239,37 @@
             // 
             // gridXaPhuong
             // 
+            this.gridXaPhuong.ContextMenuStrip = this.contextMenuStrip1;
             this.gridXaPhuong.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridXaPhuong.Location = new System.Drawing.Point(2, 21);
+            this.gridXaPhuong.Location = new System.Drawing.Point(2, 20);
             this.gridXaPhuong.MainView = this.gridView3;
             this.gridXaPhuong.Name = "gridXaPhuong";
-            this.gridXaPhuong.Size = new System.Drawing.Size(258, 371);
+            this.gridXaPhuong.Size = new System.Drawing.Size(258, 372);
             this.gridXaPhuong.TabIndex = 1;
             this.gridXaPhuong.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuEditXP,
+            this.mnuNewXP});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(178, 48);
+            // 
+            // mnuEditXP
+            // 
+            this.mnuEditXP.Name = "mnuEditXP";
+            this.mnuEditXP.Size = new System.Drawing.Size(177, 22);
+            this.mnuEditXP.Text = "Sửa Xã, Phường...";
+            this.mnuEditXP.Click += new System.EventHandler(this.mnuEditXP_Click);
+            // 
+            // mnuNewXP
+            // 
+            this.mnuNewXP.Name = "mnuNewXP";
+            this.mnuNewXP.Size = new System.Drawing.Size(177, 22);
+            this.mnuNewXP.Text = "Thêm Xã, Phường...";
+            this.mnuNewXP.Click += new System.EventHandler(this.mnuNewXP_Click);
             // 
             // gridView3
             // 
@@ -287,13 +316,29 @@
             this.gridColumn11.FieldName = "MAQH";
             this.gridColumn11.Name = "gridColumn11";
             // 
-            // bindingSource1
+            // bindingTT
             // 
-            this.bindingSource1.CurrentChanged += new System.EventHandler(this.bindingSource1_CurrentChanged);
+            this.bindingTT.CurrentChanged += new System.EventHandler(this.bindingSource1_CurrentChanged);
             // 
-            // bindingSource2
+            // bindingQH
             // 
-            this.bindingSource2.CurrentChanged += new System.EventHandler(this.bindingSource2_CurrentChanged);
+            this.bindingQH.CurrentChanged += new System.EventHandler(this.bindingSource2_CurrentChanged);
+            // 
+            // bindingXP
+            // 
+            this.bindingXP.ListChanged += new System.ComponentModel.ListChangedEventHandler(this.bindingXP_ListChanged);
+            // 
+            // lblTongXP
+            // 
+            this.lblTongXP.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTongXP.Appearance.ForeColor = System.Drawing.Color.Red;
+            this.lblTongXP.Appearance.Options.UseFont = true;
+            this.lblTongXP.Appearance.Options.UseForeColor = true;
+            this.lblTongXP.Location = new System.Drawing.Point(612, 14);
+            this.lblTongXP.Name = "lblTongXP";
+            this.lblTongXP.Size = new System.Drawing.Size(7, 13);
+            this.lblTongXP.TabIndex = 1;
+            this.lblTongXP.Text = "0";
             // 
             // FrmDVHC
             // 
@@ -309,6 +354,7 @@
             this.Load += new System.EventHandler(this.FrmDVHC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
+            this.panelControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridTinhThanh)).EndInit();
@@ -320,10 +366,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             this.groupControl3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridXaPhuong)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingTT)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingQH)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingXP)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -352,8 +399,12 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
-        private System.Windows.Forms.BindingSource bindingSource1;
-        private System.Windows.Forms.BindingSource bindingSource2;
-        private System.Windows.Forms.BindingSource bindingSource3;
+        private System.Windows.Forms.BindingSource bindingTT;
+        private System.Windows.Forms.BindingSource bindingQH;
+        private System.Windows.Forms.BindingSource bindingXP;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem mnuEditXP;
+        private System.Windows.Forms.ToolStripMenuItem mnuNewXP;
+        private DevExpress.XtraEditors.LabelControl lblTongXP;
     }
 }
